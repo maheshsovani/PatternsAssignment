@@ -1,4 +1,4 @@
-const library = require("./src/generateDiamond.js")
+const library = require("./src/patternLib.js")
 const {generateLine,generateMiddleLine ,createFilledUpperPart,createFilledLowerPart,createEmptyUpperPart,
   createEmptyLowerPart, createAngledUpperPart,createAngledLowerPart,createDiamond } = library;
 const main=function(type){

@@ -1,4 +1,4 @@
-const library = require("./src/generateRectangle.js")
+const library = require("./src/patternLib.js")
 const {generateLine ,filledRectangle ,alternateRectangle ,emptyRectangle} = library;
 const main = function(){
   let pattern=process.argv[2];

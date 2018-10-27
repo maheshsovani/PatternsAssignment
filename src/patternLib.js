@@ -103,14 +103,6 @@ const createDiamond=function(type,width){
     return filledDiamond;
   }
 }
-exports.generateMiddleLine = generateMiddleLine;
-exports.createFilledUpperPart = createFilledUpperPart;
-exports.createFilledLowerPart = createFilledLowerPart;
-exports.createEmptyUpperPart = createEmptyUpperPart;
-exports.createEmptyLowerPart = createEmptyLowerPart;
-exports.createAngledUpperPart = createAngledUpperPart;
-exports.createAngledLowerPart = createAngledLowerPart;
-exports.createDiamond = createDiamond;
 
 const filledRectangle=function(breadth,altitude){
   let finalOutput="";
@@ -124,7 +116,6 @@ const filledRectangle=function(breadth,altitude){
   return finalOutput;
 }
 
-
 const alternateRectangle=function(breadth,altitude){
   let output="";
   for (let lineNo=0;lineNo<altitude;lineNo++){
@@ -137,7 +128,6 @@ const alternateRectangle=function(breadth,altitude){
   }
   return output;
 }
-
 
 const emptyRectangle=function(breadth,altitude){
   let spaceAdder=0;
@@ -156,10 +146,6 @@ const emptyRectangle=function(breadth,altitude){
   return finalOutput;
 }
 
-exports.filledRectangle = filledRectangle;
-exports.alternateRectangle = alternateRectangle;
-exports.emptyRectangle = emptyRectangle;
-
 const leftTriangle=function(altitude){
   let line="";
   let output="";
@@ -172,7 +158,6 @@ const leftTriangle=function(altitude){
   }
   return output;
 }
-
 
 const rightTriangle=function(altitude){
   let line="";
@@ -189,5 +174,17 @@ const rightTriangle=function(altitude){
   }
   return output;
 }
+
 exports.leftTriangle = leftTriangle;
+exports.generateMiddleLine = generateMiddleLine;
+exports.createFilledUpperPart = createFilledUpperPart;
+exports.createFilledLowerPart = createFilledLowerPart;
+exports.createEmptyUpperPart = createEmptyUpperPart;
+exports.createEmptyLowerPart = createEmptyLowerPart;
+exports.createAngledUpperPart = createAngledUpperPart;
+exports.createAngledLowerPart = createAngledLowerPart;
+exports.createDiamond = createDiamond;
 exports.rightTriangle = rightTriangle;
+exports.filledRectangle = filledRectangle;
+exports.alternateRectangle = alternateRectangle;
+exports.emptyRectangle = emptyRectangle;

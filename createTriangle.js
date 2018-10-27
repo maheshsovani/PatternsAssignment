@@ -1,4 +1,4 @@
-const library = require("./src/generateTriangles.js");
+const library = require("./src/patternLib.js");
 const {generateLine ,leftTriangle ,rightTriangle} = library;
 const main = function(){
   let position=process.argv[2];
