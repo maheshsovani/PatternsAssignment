@@ -197,6 +197,7 @@ const generateTriangle = function (typeOfTriangle,height){
     return (rightTriangle(height));
   }
 }
+
 const generateDiamond = function (typeOfDiamond , width){
   if (width%2==0){
     width=width+1;
@@ -214,6 +215,3 @@ const generateDiamond = function (typeOfDiamond , width){
 exports.generateDiamond = generateDiamond;
 exports.generateRectangle = generateRectangle;
 exports.generateTriangle = generateTriangle;
-exports.filledRectangle = filledRectangle;
-exports.alternateRectangle = alternateRectangle;
-exports.emptyRectangle = emptyRectangle;
