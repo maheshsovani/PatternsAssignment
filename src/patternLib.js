@@ -175,16 +175,45 @@ const rightTriangle=function(altitude){
   return output;
 }
 
-exports.leftTriangle = leftTriangle;
-exports.generateMiddleLine = generateMiddleLine;
-exports.createFilledUpperPart = createFilledUpperPart;
-exports.createFilledLowerPart = createFilledLowerPart;
-exports.createEmptyUpperPart = createEmptyUpperPart;
-exports.createEmptyLowerPart = createEmptyLowerPart;
-exports.createAngledUpperPart = createAngledUpperPart;
-exports.createAngledLowerPart = createAngledLowerPart;
-exports.createDiamond = createDiamond;
-exports.rightTriangle = rightTriangle;
+const generateRectangle = function (typeOfRectangle,width,height){
+  if(typeOfRectangle == "empty"){
+    return (emptyRectangle(width,height));
+  }
+
+  if (typeOfRectangle == "filled"){
+    return (filledRectangle(width,height));
+  }
+
+  if(typeOfRectangle == "alternate"){
+    return (alternateRectangle(width,height));
+  }
+}
+
+const generateTriangle = function (typeOfTriangle,height){
+  if(typeOfTriangle == "left"){
+    return (leftTriangle(height));
+  }
+  if(typeOfTriangle == "right"){
+    return (rightTriangle(height));
+  }
+}
+const generateDiamond = function (typeOfDiamond , width){
+  if (width%2==0){
+    width=width+1;
+  }
+  if (typeOfDiamond=="angled"){
+    return (createDiamond("angled",width));
+  }
+  if (typeOfDiamond=="empty"){
+    return (createDiamond("empty",width));
+  }
+  if (typeOfDiamond=="filled"){
+    return (createDiamond("filled",width));
+  }
+}
+exports.generateDiamond = generateDiamond;
+exports.generateRectangle = generateRectangle;
+exports.generateTriangle = generateTriangle;
 exports.filledRectangle = filledRectangle;
 exports.alternateRectangle = alternateRectangle;
 exports.emptyRectangle = emptyRectangle;
