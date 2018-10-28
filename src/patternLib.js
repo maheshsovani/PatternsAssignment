@@ -16,6 +16,7 @@ const createFilledUpperPart=function(width){
   let upperPart ="";
   let symbol="*";
   let delimeter="";
+
   for(let lineNo=width;lineNo>=0;lineNo-=2){
     let spacesOnLeft="";
     spacesOnLeft+=generateLine(" ",((lineNo-1)/2));
@@ -45,7 +46,8 @@ const createEmptyUpperPart=function(width){
   let lineWidth=3;
   upperPart+= generateLine(" ",((width-1)/2))+"*"+"\n";
   for (lineNo=width-2;lineNo>0;lineNo-=2,lineWidth+=2){
-    upperPart+=delimeter+ generateLine(" ",((lineNo-1)/2))+generateMiddleLine(lineWidth,"*"," ","*");
+    upperPart+=delimeter+ generateLine(" ",((lineNo-1)/2));
+    upperPart+= generateMiddleLine(lineWidth,"*"," ","*");
     delimeter="\n";
   }
   return upperPart;
@@ -56,7 +58,8 @@ const createEmptyLowerPart=function(width){
   let lineWidth=width-2;
   let leftSpaces=1;
   for(let lineNo=width-2;lineNo>1;lineNo-=2,lineWidth-=2){
-    lowerPart+=generateLine(" ",leftSpaces)+generateMiddleLine(lineWidth,"*"," ","*")+"\n";
+    lowerPart+=generateLine(" ",leftSpaces)
+    lowerPart+=generateMiddleLine(lineWidth,"*"," ","*")+"\n";
     leftSpaces+=1;
   }
   lowerPart+=generateLine(" ",((width-1)/2))+"*";
@@ -69,7 +72,8 @@ const createAngledUpperPart=function(width){
   let lineWidth=3;
   upperPart+= generateLine(" ",((width-1)/2))+"*"+"\n";
   for (lineNo=width-2;lineNo>=3;lineNo-=2){
-    upperPart+=delimeter+ generateLine(" ",((lineNo-1)/2))+generateMiddleLine(lineWidth,"/"," ","\\");
+    upperPart+=delimeter+ generateLine(" ",((lineNo-1)/2));
+    upperPart+=generateMiddleLine(lineWidth,"/"," ","\\");
     delimeter="\n";
     lineWidth+=2;
   }
@@ -82,7 +86,8 @@ const createAngledLowerPart=function(width){
   let lineWidth=width-2;
   let leftSpaces=1;
   for(let lineNo=width-2;lineNo>1;lineNo-=2,lineWidth-=2){
-    lowerPart+=generateLine(" ",leftSpaces)+generateMiddleLine(lineWidth,"\\"," ","/")+"\n";
+    lowerPart+=generateLine(" ",leftSpaces)
+    lowerPart+=generateMiddleLine(lineWidth,"\\"," ","/")+"\n";
     leftSpaces+=1;
   }
   lowerPart+=generateLine(" ",((width-1)/2))+"*";
@@ -104,75 +109,69 @@ const createDiamond=function(type,width){
   }
 }
 
-const filledRectangle=function(breadth,altitude){
-  let finalOutput="";
-  let output="";
+const createFilledRect=function(breadth,altitude){
+  let rectangle="";
   let delimeter="";
-  output+=generateLine("*",breadth);
+  let line =generateLine("*",breadth);
   for (let lineNo=0;lineNo<altitude;lineNo++){
-    finalOutput+=delimeter+output;
+    rectangle+= delimeter+line;
     delimeter="\n";
   }
-  return finalOutput;
+  return rectangle;
 }
 
 const alternateRectangle=function(breadth,altitude){
-  let output="";
+  let rectangle ="";
   for (let lineNo=0;lineNo<altitude;lineNo++){
-    if (lineNo %2 ==0){
-      output+=generateLine("-",breadth);
+    if (lineNo %2 == 0){
+      rectangle+= generateLine("-",breadth);
     } else {
-      output+=generateLine("*",breadth)
+      rectangle+= generateLine("*",breadth)
     }
-    output=output+"\n";
+   rectangle = rectangle + "\n";
   }
-  return output;
+  return rectangle;
 }
 
 const emptyRectangle=function(breadth,altitude){
-  let spaceAdder=0;
-  let spaces="";
-  let output="";
-  let finalOutput="";
-  spaces=generateLine(" ",(breadth-2))
-  output=generateLine("*",breadth);
+  let rectangle  = "";
   for (let lineNo=1;lineNo<=altitude;lineNo++){
     if (lineNo==1 || lineNo==altitude){
-      finalOutput+=output+"\n";
+      rectangle+= generateLine("*",breadth) + "\n";
     } else {
-      finalOutput+="*"+spaces+"*"+"\n";
+      rectangle+= generateMiddleLine (breadth,"*"," ","*")+ "\n";
     }
   }
-  return finalOutput;
+  return rectangle;
 }
 
-const leftTriangle=function(altitude){
-  let line="";
-  let output="";
-  let delimeter="";
+const createLeftTriangle=function(altitude){
+  let line = "";
+  let triangle = "";
+  let delimeter = "";
   for (let lineNo=1;lineNo<=altitude;lineNo++){
     line+=generateLine("*",lineNo);
-    output+=delimeter+line;
+    triangle+= delimeter+line;
     line="";
     delimeter="\n";
   }
-  return output;
+  return triangle;
 }
 
-const rightTriangle=function(altitude){
+const createRightTriangle=function(altitude){
   let line="";
   let noOfSymbols=0;
-  let output="";
-  let delimeter="";
+  let triangle = "";
+  let delimeter = "";
   for (let lineNo=altitude;lineNo>0;lineNo--){
-    line+=generateLine(" ",(lineNo-1));
-    noOfSymbols=(altitude-(lineNo-1));
+    line+= generateLine(" ",(lineNo-1));
+    noOfSymbols = altitude-(lineNo-1);
     line+=generateLine("*",noOfSymbols)
-    output+=delimeter+line;
+    triangle+= delimeter+line;
     line="";
     delimeter="\n";
   }
-  return output;
+  return triangle;
 }
 
 const generateRectangle = function (typeOfRectangle,width,height){
@@ -181,7 +180,7 @@ const generateRectangle = function (typeOfRectangle,width,height){
   }
 
   if (typeOfRectangle == "filled"){
-    return (filledRectangle(width,height));
+    return (createFilledRect(width,height));
   }
 
   if(typeOfRectangle == "alternate"){
@@ -191,10 +190,10 @@ const generateRectangle = function (typeOfRectangle,width,height){
 
 const generateTriangle = function (typeOfTriangle,height){
   if(typeOfTriangle == "left"){
-    return (leftTriangle(height));
+    return (createLeftTriangle(height));
   }
   if(typeOfTriangle == "right"){
-    return (rightTriangle(height));
+    return (createRightTriangle(height));
   }
 }
 
