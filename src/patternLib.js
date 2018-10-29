@@ -195,18 +195,18 @@ const generateTriangle = function (patternSpecification){
 
 const generateDiamond = function (patternSpecification){
   let  typeOfDiamond = patternSpecification.type;
-  let  width = patternSpecification.width;
-  if (width%2==0){
-    width=width+1;
+  let  height = patternSpecification.height;
+  if (height%2==0){
+    height = height+1;
   }
   if (typeOfDiamond=="angled"){
-    return (createDiamond("angled",width));
+    return (createDiamond("angled",height));
   }
   if (typeOfDiamond=="empty"){
-    return (createDiamond("empty",width));
+    return (createDiamond("empty",height));
   }
   if (typeOfDiamond=="filled"){
-    return (createDiamond("filled",width));
+    return (createDiamond("filled",height));
   }
 }
 exports.generateDiamond = generateDiamond;
