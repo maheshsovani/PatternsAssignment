@@ -6,5 +6,13 @@ const generateLine=function(character,length){
   return generatedLine;
 }
 
+const generateHollowLine=function(width,startChar,middleChar,endChar){
+  let hollowLine="";
+  hollowLine+=startChar+generateLine(middleChar,(width-2))+endChar;
+  return hollowLine;
+}
+
+
+exports.generateHollowLine = generateHollowLine;
 exports.generateLine = generateLine;
 
