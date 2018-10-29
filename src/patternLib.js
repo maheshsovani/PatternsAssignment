@@ -1,16 +1,7 @@
-const generateLine=function(character,length){
-  let generatedLine="";
-  for (characterNo=0;characterNo<length;characterNo++){
-    generatedLine +=character;
-  }
-  return generatedLine;
-}
+const library = require("./patternUtil.js");
+const generateLine = library.generateLine;
+const generateHollowLine = library.generateHollowLine;
 
-const generateMiddleLine=function(width,startChar,middleChar,endChar){
-  let middleLine="";
-  middleLine+=startChar+generateLine(middleChar,(width-2))+endChar;
-  return middleLine;
-}
 
 const createFilledUpperPart=function(width){
   let upperPart ="";
@@ -47,7 +38,7 @@ const createEmptyUpperPart=function(width){
   upperPart+= generateLine(" ",((width-1)/2))+"*"+"\n";
   for (lineNo=width-2;lineNo>0;lineNo-=2,lineWidth+=2){
     upperPart+=delimeter+ generateLine(" ",((lineNo-1)/2));
-    upperPart+= generateMiddleLine(lineWidth,"*"," ","*");
+    upperPart+= generateHollowLine(lineWidth,"*"," ","*");
     delimeter="\n";
   }
   return upperPart;
@@ -59,7 +50,7 @@ const createEmptyLowerPart=function(width){
   let leftSpaces=1;
   for(let lineNo=width-2;lineNo>1;lineNo-=2,lineWidth-=2){
     lowerPart+=generateLine(" ",leftSpaces)
-    lowerPart+=generateMiddleLine(lineWidth,"*"," ","*")+"\n";
+    lowerPart+=generateHollowLine(lineWidth,"*"," ","*")+"\n";
     leftSpaces+=1;
   }
   lowerPart+=generateLine(" ",((width-1)/2))+"*";
@@ -73,11 +64,11 @@ const createAngledUpperPart=function(width){
   upperPart+= generateLine(" ",((width-1)/2))+"*"+"\n";
   for (lineNo=width-2;lineNo>=3;lineNo-=2){
     upperPart+=delimeter+ generateLine(" ",((lineNo-1)/2));
-    upperPart+=generateMiddleLine(lineWidth,"/"," ","\\");
+    upperPart+=generateHollowLine(lineWidth,"/"," ","\\");
     delimeter="\n";
     lineWidth+=2;
   }
-  upperPart+=delimeter+generateMiddleLine(lineWidth,"*"," ","*");
+  upperPart+=delimeter+generateHollowLine(lineWidth,"*"," ","*");
   return upperPart;
 }
 
@@ -87,7 +78,7 @@ const createAngledLowerPart=function(width){
   let leftSpaces=1;
   for(let lineNo=width-2;lineNo>1;lineNo-=2,lineWidth-=2){
     lowerPart+=generateLine(" ",leftSpaces)
-    lowerPart+=generateMiddleLine(lineWidth,"\\"," ","/")+"\n";
+    lowerPart+=generateHollowLine(lineWidth,"\\"," ","/")+"\n";
     leftSpaces+=1;
   }
   lowerPart+=generateLine(" ",((width-1)/2))+"*";
@@ -139,7 +130,7 @@ const emptyRectangle=function(breadth,altitude){
     if (lineNo==1 || lineNo==altitude){
       rectangle+= generateLine("*",breadth) + "\n";
     } else {
-      rectangle+= generateMiddleLine (breadth,"*"," ","*")+ "\n";
+      rectangle+= generateHollowLine (breadth,"*"," ","*")+ "\n";
     }
   }
   return rectangle;
@@ -174,7 +165,10 @@ const createRightTriangle=function(altitude){
   return triangle;
 }
 
-const generateRectangle = function (typeOfRectangle,width,height){
+const generateRectangle = function (patternSpecification){
+  let typeOfRectangle = patternSpecification.type;
+  let width = patternSpecification.width;
+  let height = patternSpecification.height;
   if(typeOfRectangle == "empty"){
     return (emptyRectangle(width,height));
   }
@@ -188,7 +182,9 @@ const generateRectangle = function (typeOfRectangle,width,height){
   }
 }
 
-const generateTriangle = function (typeOfTriangle,height){
+const generateTriangle = function (patternSpecification){
+  let typeOfTriangle = patternSpecification.type;
+  let height = patternSpecification.height;
   if(typeOfTriangle == "left"){
     return (createLeftTriangle(height));
   }
@@ -197,7 +193,9 @@ const generateTriangle = function (typeOfTriangle,height){
   }
 }
 
-const generateDiamond = function (typeOfDiamond , width){
+const generateDiamond = function (patternSpecification){
+  let  typeOfDiamond = patternSpecification.type;
+  let  width = patternSpecification.width;
   if (width%2==0){
     width=width+1;
   }
