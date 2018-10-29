@@ -12,7 +12,17 @@ const generateHollowLine=function(width,startChar,middleChar,endChar){
   return hollowLine;
 }
 
+const readUserInput = function (args){
+  let typeOfPattern = args[2];
+  let width = +args[3];
+  let height = +args[4];
+  if(isNaN(height)){
+    height = width;
+  }
+  return {type : typeOfPattern , width:width , height:height };
+}
 
 exports.generateHollowLine = generateHollowLine;
+exports.readUserInput = readUserInput;
 exports.generateLine = generateLine;
 
