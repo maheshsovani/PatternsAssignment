@@ -1,14 +1,19 @@
-const generateLine=function(character,length){
-  let generatedLine="";
-  for (characterNo=0;characterNo<length;characterNo++){
-    generatedLine+= character;
-  }
+const generateLine=function(character,width){
+  let  generatedLine = new Array(width).fill(character).join("");
   return generatedLine;
 }
 
+const spaceLineGenerator = function(width){
+  return generateLine(" ",width);
+}
+
+const starLineGenerator = function(width){
+  return generateLine("*",width);
+}
+
 const generateHollowLine=function(width,startChar,middleChar,endChar){
-  let hollowLine="";
-  hollowLine+=startChar+generateLine(middleChar,(width-2))+endChar;
+  if(width < 2 ){width = 2}
+  let hollowLine = startChar + spaceLineGenerator(width-2)+ endChar;
   return hollowLine;
 }
 
@@ -24,5 +29,7 @@ const readUserInput = function (args){
 
 exports.generateHollowLine = generateHollowLine;
 exports.readUserInput = readUserInput;
+exports.spaceLineGenerator= spaceLineGenerator;
+exports.starLineGenerator= starLineGenerator ;
 exports.generateLine = generateLine;
 

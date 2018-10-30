@@ -1,6 +1,6 @@
 const assert = require("assert");
 const library = require("../src/patternUtil.js");
-const {readUserInput, generateLine, generateHollowLine} = library ;
+const {readUserInput, generateLine,starLineGenerator,generateHollowLine,spaceLineGenerator} = library ;
 
 //----------Tets cases for generate line function----------//
 
@@ -10,6 +10,19 @@ assert.deepStrictEqual(generateLine(" ",5),"     ");
 assert.deepStrictEqual(generateLine("-",3),"---");
 assert.deepStrictEqual(generateLine("ii",3),"iiiiii");
 
+//----------Tets cases for star line generator function----------//
+
+assert.deepStrictEqual(starLineGenerator(0),"");
+assert.deepStrictEqual(starLineGenerator(1),"*");
+assert.deepStrictEqual(starLineGenerator(2),"**");
+assert.deepStrictEqual(starLineGenerator(5),"*****");
+
+//----------Tets cases for generate line function----------//
+
+assert.deepStrictEqual(spaceLineGenerator(0),"");
+assert.deepStrictEqual(spaceLineGenerator(1)," ");
+assert.deepStrictEqual(spaceLineGenerator(3),"   ");
+assert.deepStrictEqual(spaceLineGenerator(5),"     ");
 //----------Tets cases for generate hollow line function----------//
 
 assert.deepStrictEqual(generateHollowLine(0,"*"," ","*"),"**");

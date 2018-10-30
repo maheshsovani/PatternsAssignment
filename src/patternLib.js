@@ -1,6 +1,8 @@
 const library = require("./patternUtil.js");
 const generateLine = library.generateLine;
 const generateHollowLine = library.generateHollowLine;
+const starLineGenerator = library.starLineGenerator;
+const spaceLineGenerator = library.spaceLineGenerator;
 
 
 const createFilledUpperPart=function(width){
@@ -10,7 +12,7 @@ const createFilledUpperPart=function(width){
 
   for(let lineNo=width;lineNo>=0;lineNo-=2){
     let spacesOnLeft="";
-    spacesOnLeft+=generateLine(" ",((lineNo-1)/2));
+    spacesOnLeft+= spaceLineGenerator((lineNo-1)/2);
     upperPart+= delimeter + spacesOnLeft + symbol;
     delimeter="\n";
     symbol+="**";
