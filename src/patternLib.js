@@ -139,12 +139,10 @@ const emptyRectangle=function(breadth,altitude){
 }
 
 const createLeftTriangle=function(altitude){
-  let triangle = [];
-  for (let lineNo=1;lineNo<=altitude;lineNo++){
-    let line = starLineGenerator(lineNo);
-    triangle.push(line);
-  }
-  return triangle;
+  return createRightTriangle(altitude).map(reverseElement);
+}
+const reverseElement = function(element){
+  return element.split("").reverse().join("")
 }
 
 const justifyRight = function(width,symbols){
