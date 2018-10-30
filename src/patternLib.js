@@ -26,7 +26,7 @@ const createFilledLowerPart=function(width){
   let lowerPart="";
   for(let lineNo=width-2;lineNo>=0;lineNo-=2,spacesOnLeft+=" "){
     let symbol="*";
-    symbol+=generateLine("*",(lineNo-1));
+    symbol+= starLineGenerator (lineNo-1);
     lowerPart+=delimeter+spacesOnLeft+symbol;
     delimeter="\n";
   }
@@ -39,7 +39,7 @@ const createEmptyUpperPart=function(width){
   let lineWidth=3;
   upperPart+= generateLine(" ",((width-1)/2))+"*"+"\n";
   for (lineNo=width-2;lineNo>0;lineNo-=2,lineWidth+=2){
-    upperPart+=delimeter+ generateLine(" ",((lineNo-1)/2));
+    upperPart+=delimeter+ spaceLineGenerator((lineNo-1)/2);
     upperPart+= generateHollowLine(lineWidth,"*"," ","*");
     delimeter="\n";
   }
@@ -51,11 +51,11 @@ const createEmptyLowerPart=function(width){
   let lineWidth=width-2;
   let leftSpaces=1;
   for(let lineNo=width-2;lineNo>1;lineNo-=2,lineWidth-=2){
-    lowerPart+=generateLine(" ",leftSpaces)
+    lowerPart+= spaceLineGenerator(leftSpaces);
     lowerPart+=generateHollowLine(lineWidth,"*"," ","*")+"\n";
     leftSpaces+=1;
   }
-  lowerPart+=generateLine(" ",((width-1)/2))+"*";
+  lowerPart+=spaceLineGenerator((width-1)/2)+"*";
   return lowerPart;
 }
 
@@ -65,7 +65,7 @@ const createAngledUpperPart=function(width){
   let lineWidth=3;
   upperPart+= generateLine(" ",((width-1)/2))+"*"+"\n";
   for (lineNo=width-2;lineNo>=3;lineNo-=2){
-    upperPart+=delimeter+ generateLine(" ",((lineNo-1)/2));
+    upperPart+=delimeter+ spaceLineGenerator((lineNo-1)/2);
     upperPart+=generateHollowLine(lineWidth,"/"," ","\\");
     delimeter="\n";
     lineWidth+=2;
@@ -79,11 +79,11 @@ const createAngledLowerPart=function(width){
   let lineWidth=width-2;
   let leftSpaces=1;
   for(let lineNo=width-2;lineNo>1;lineNo-=2,lineWidth-=2){
-    lowerPart+=generateLine(" ",leftSpaces)
+    lowerPart+=spaceLineGenerator(leftSpaces)
     lowerPart+=generateHollowLine(lineWidth,"\\"," ","/")+"\n";
     leftSpaces+=1;
   }
-  lowerPart+=generateLine(" ",((width-1)/2))+"*";
+  lowerPart+= spaceLineGenerator((width-1)/2)+"*";
   return lowerPart;
 }
 
@@ -105,7 +105,7 @@ const createDiamond=function(type,width){
 const createFilledRect=function(breadth,altitude){
   let rectangle="";
   let delimeter="";
-  let line =generateLine("*",breadth);
+  let line = starLineGenerator(breadth);
   for (let lineNo=0;lineNo<altitude;lineNo++){
     rectangle+= delimeter+line;
     delimeter="\n";
@@ -119,7 +119,7 @@ const alternateRectangle=function(breadth,altitude){
     if (lineNo %2 == 0){
       rectangle+= generateLine("-",breadth);
     } else {
-      rectangle+= generateLine("*",breadth)
+      rectangle+= starLineGenerator(breadth)
     }
    rectangle = rectangle + "\n";
   }
@@ -130,7 +130,7 @@ const emptyRectangle=function(breadth,altitude){
   let rectangle  = "";
   for (let lineNo=1;lineNo<=altitude;lineNo++){
     if (lineNo==1 || lineNo==altitude){
-      rectangle+= generateLine("*",breadth) + "\n";
+      rectangle+= starLineGenerator(breadth) + "\n";
     } else {
       rectangle+= generateHollowLine (breadth,"*"," ","*")+ "\n";
     }
@@ -143,7 +143,7 @@ const createLeftTriangle=function(altitude){
   let triangle = "";
   let delimeter = "";
   for (let lineNo=1;lineNo<=altitude;lineNo++){
-    line+=generateLine("*",lineNo);
+    line+= starLineGenerator(lineNo);
     triangle+= delimeter+line;
     line="";
     delimeter="\n";
@@ -159,7 +159,7 @@ const createRightTriangle=function(altitude){
   for (let lineNo=altitude;lineNo>0;lineNo--){
     line+= generateLine(" ",(lineNo-1));
     noOfSymbols = altitude-(lineNo-1);
-    line+=generateLine("*",noOfSymbols)
+    line+= starLineGenerator(noOfSymbols)
     triangle+= delimeter+line;
     line="";
     delimeter="\n";

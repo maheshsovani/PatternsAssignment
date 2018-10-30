@@ -23,6 +23,7 @@ assert.deepStrictEqual(spaceLineGenerator(0),"");
 assert.deepStrictEqual(spaceLineGenerator(1)," ");
 assert.deepStrictEqual(spaceLineGenerator(3),"   ");
 assert.deepStrictEqual(spaceLineGenerator(5),"     ");
+
 //----------Tets cases for generate hollow line function----------//
 
 assert.deepStrictEqual(generateHollowLine(0,"*"," ","*"),"**");
