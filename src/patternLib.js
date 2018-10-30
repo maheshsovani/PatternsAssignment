@@ -1,9 +1,5 @@
 const library = require("./patternUtil.js");
-const generateLine = library.generateLine;
-const generateHollowLine = library.generateHollowLine;
-const starLineGenerator = library.starLineGenerator;
-const spaceLineGenerator = library.spaceLineGenerator;
-
+const {generateLine,generateHollowLine , starLineGenerator ,spaceLineGenerator} = library;
 
 const createFilledUpperPart=function(width){
   let symbol="*";
@@ -65,6 +61,7 @@ const createAngledUpperPart=function(width){
   let lineWidth=3;
   let firstLine = spaceLineGenerator((width-1)/2)+"*";
   angledUpperPart.push( firstLine);
+
   for (lineNo = width-2 ;lineNo >= 3 ;lineNo-= 2){
     let line = spaceLineGenerator((lineNo-1)/2);
     line += generateHollowLine(lineWidth,"/"," ","\\");
@@ -80,6 +77,7 @@ const createAngledLowerPart=function(width){
   let angledLowerPart = [];
   let lineWidth=width-2;
   let leftSpaces=1;
+
   for(let lineNo = width-2;lineNo > 1;lineNo-= 2,lineWidth-= 2){
     let line = spaceLineGenerator(leftSpaces)
     line += generateHollowLine(lineWidth,"\\"," ","/");
@@ -106,7 +104,7 @@ const createDiamond=function(type,width){
   }
 }
 
-const createFilledRect=function(breadth,altitude){
+const filledRectangle = function(breadth,altitude){
   let rectangle = [];
   let line = starLineGenerator(breadth);
   for (let lineNo=0;lineNo<altitude;lineNo++){
@@ -118,7 +116,7 @@ const createFilledRect=function(breadth,altitude){
 const alternateRectangle=function(breadth,altitude){
   let rectangle = [] ;
   for (let lineNo=0;lineNo<altitude;lineNo++){
-   let line = starLineGenerator(breadth);
+    let line = starLineGenerator(breadth);
     if (lineNo %2 == 0){
       line = generateLine("-",breadth);
     }
@@ -156,14 +154,10 @@ const justifyRight = function(width,symbols){
 
 const createRightTriangle=function(altitude){
   let triangle = [];
-  let symbols = "";
-  let line = "";
   for (let lineNo = 1;lineNo <= altitude;lineNo++){
-     symbols = starLineGenerator(lineNo);
-      line = justifyRight(altitude,symbols);
+    let symbols = starLineGenerator(lineNo);
+    let line = justifyRight(altitude,symbols);
     triangle.push(line);
-    symbols = "";
-    line = "";
   }
   return triangle;
 }
@@ -172,46 +166,37 @@ const generateRectangle = function (patternSpecification){
   let typeOfRectangle = patternSpecification.type;
   let width = patternSpecification.width;
   let height = patternSpecification.height;
-  if(typeOfRectangle == "empty"){
-    return emptyRectangle(width,height).join("\n");
-  }
+  let pattern = {};
 
-  if (typeOfRectangle == "filled"){
-    return createFilledRect(width,height).join("\n");
-  }
+  pattern["empty"] = emptyRectangle(width,height).join("\n");
+  pattern["filled"] = filledRectangle(width,height).join("\n");
+  pattern["alternate"] = alternateRectangle(width,height).join("\n");
+  return pattern[typeOfRectangle];
 
-  if(typeOfRectangle == "alternate"){
-    return alternateRectangle(width,height).join("\n");
-  }
 }
 
 const generateTriangle = function (patternSpecification){
-  let typeOfTriangle = patternSpecification.type;
+  let type = patternSpecification.type;
   let width = patternSpecification.height;
-  if(typeOfTriangle == "left"){
-    return createLeftTriangle(width).join("\n");
-  }
-  if(typeOfTriangle == "right"){
-    return createRightTriangle(width).join("\n");
-  }
+  let pattern = {};
+  pattern["left"] = createLeftTriangle(width).join("\n")
+  pattern["right"] = createRightTriangle(width).join("\n")
+  return pattern[type];
 }
 
 const generateDiamond = function (patternSpecification){
   let  typeOfDiamond = patternSpecification.type;
   let  height = patternSpecification.height;
+  let pattern = {};
   if (height %2 == 0){
     height = height+1;
   }
-  if (typeOfDiamond=="angled"){
-    return createDiamond("angled",height).join("\n");
-  }
-  if (typeOfDiamond=="empty"){
-    return createDiamond("empty",height).join("\n");
-  }
-  if (typeOfDiamond=="filled"){
-    return createDiamond("filled",height).join("\n");
-  }
+  pattern["angled"] = createDiamond("angled",height).join("\n"); 
+  pattern["empty"] = createDiamond("empty",height).join("\n"); 
+  pattern["filled"] = createDiamond("filled",height).join("\n"); 
+  return pattern[typeOfDiamond];
 }
+
 exports.generateDiamond = generateDiamond;
 exports.generateRectangle = generateRectangle;
 exports.generateTriangle = generateTriangle;
