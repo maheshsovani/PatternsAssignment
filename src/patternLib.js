@@ -1,32 +1,12 @@
 const library = require("./patternUtil.js");
-const {generateLine,generateHollowLine , starLineGenerator ,spaceLineGenerator} = library;
-
-const emptyLineGenerator = function(width){
-  return generateHollowLine(width,"*"," ","*");
-}
-
-const createDiamondSeries = function(height){
-  let series = [];
-  for (let count = 1 ; count <= height ; count+= 2){
-    series.push(count);
-  }
-  let duplicateSeries = series.slice(0);
-  duplicateSeries.pop();
-  let reversed = duplicateSeries.reverse();
-  return series.concat(reversed);
-}
-
-const justifier = function(width,message){
-  let spacesToAdd = width-message.length;
-  return spaceLineGenerator(spacesToAdd/2)+message;
-}
+const {createDiamondSeries ,centreJustifier,emptyLineGenerator , generateLine,generateHollowLine , starLineGenerator ,spaceLineGenerator} = library;
 
 const createFilledDiamond = function(width){
   let seriesOfLines = createDiamondSeries(width);
   let diamond = [];
   let series = seriesOfLines.map(starLineGenerator);
   for (let index=0;index<width;index++){
-    diamond.push(justifier(width,series[index]));
+    diamond.push(centreJustifier(width,series[index]));
   }
   return diamond;
 }

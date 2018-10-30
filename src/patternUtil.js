@@ -16,6 +16,27 @@ const generateHollowLine=function(width,startChar,middleChar,endChar){
   return hollowLine;
 }
 
+const emptyLineGenerator = function(width){
+  return generateHollowLine(width,"*"," ","*");
+}
+
+const centreJustifier = function(width,message){
+  let spacesToAdd = width-message.length;
+  return spaceLineGenerator(Math.floor(spacesToAdd/2))+message;
+}
+
+
+const createDiamondSeries = function(height){
+  let series = [];
+  for (let count = 1 ; count <= height ; count+= 2){
+    series.push(count);
+  }
+  let duplicateSeries = series.slice(0);
+  duplicateSeries.pop();
+  let reversed = duplicateSeries.reverse();
+  return series.concat(reversed);
+}
+
 const readUserInput = function (args){
   let typeOfPattern = args[2];
   let width = +args[3];
@@ -26,6 +47,9 @@ const readUserInput = function (args){
   return {type : typeOfPattern , width:width , height:height };
 }
 
+exports.createDiamondSeries = createDiamondSeries;
+exports.centreJustifier = centreJustifier;
+exports.emptyLineGenerator = emptyLineGenerator;
 exports.generateHollowLine = generateHollowLine;
 exports.readUserInput = readUserInput;
 exports.spaceLineGenerator= spaceLineGenerator;
