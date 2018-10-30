@@ -6,91 +6,95 @@ const spaceLineGenerator = library.spaceLineGenerator;
 
 
 const createFilledUpperPart=function(width){
-  let upperPart ="";
   let symbol="*";
-  let delimeter="";
+  let filledDiamondUpper = [];
 
   for(let lineNo=width;lineNo>=0;lineNo-=2){
-    let spacesOnLeft="";
-    spacesOnLeft+= spaceLineGenerator((lineNo-1)/2);
-    upperPart+= delimeter + spacesOnLeft + symbol;
-    delimeter="\n";
+    let spacesOnLeft = spaceLineGenerator((lineNo-1)/2);
+    line = spacesOnLeft + symbol;
+    filledDiamondUpper.push(line)
     symbol+="**";
   }
-  return upperPart;
+  return filledDiamondUpper;
 }
 
 const createFilledLowerPart=function(width){
   let spacesOnLeft=" ";
-  let delimeter="";
-  let lowerPart="";
-  for(let lineNo=width-2;lineNo>=0;lineNo-=2,spacesOnLeft+=" "){
-    let symbol="*";
-    symbol+= starLineGenerator (lineNo-1);
-    lowerPart+=delimeter+spacesOnLeft+symbol;
-    delimeter="\n";
+  let filledDiamondLower = [];
+
+  for(let lineNo=width-2;lineNo >= 0;lineNo-=2,spacesOnLeft+=" "){
+    let symbols = starLineGenerator(lineNo);
+    line = spacesOnLeft+symbols;
+    filledDiamondLower.push(line)
   }
-  return lowerPart;
+  return filledDiamondLower;
 }
 
 const createEmptyUpperPart=function(width){
-  let delimeter="";
-  let upperPart="";
+  let emptyUpperPart= [];
   let lineWidth=3;
-  upperPart+= generateLine(" ",((width-1)/2))+"*"+"\n";
-  for (lineNo=width-2;lineNo>0;lineNo-=2,lineWidth+=2){
-    upperPart+=delimeter+ spaceLineGenerator((lineNo-1)/2);
-    upperPart+= generateHollowLine(lineWidth,"*"," ","*");
-    delimeter="\n";
+  let upperLine = spaceLineGenerator((width-1)/2) +  "*";
+  emptyUpperPart.push(upperLine);
+
+  for ( lineNo = width-2 ; lineNo>0 ; lineNo-=2 ,lineWidth+=2 ){
+    let line = spaceLineGenerator((lineNo-1)/2); 
+    line += generateHollowLine(lineWidth,"*"," ","*");
+    emptyUpperPart.push(line);
+    line = "";
   }
-  return upperPart;
+  return emptyUpperPart;
 }
 
 const createEmptyLowerPart=function(width){
-  let lowerPart="";
-  let lineWidth=width-2;
+  let emptyLowerPart = [];
   let leftSpaces=1;
-  for(let lineNo=width-2;lineNo>1;lineNo-=2,lineWidth-=2){
-    lowerPart+= spaceLineGenerator(leftSpaces);
-    lowerPart+=generateHollowLine(lineWidth,"*"," ","*")+"\n";
+  let lastLine = spaceLineGenerator((width-1)/2)+"*";
+  for(let lineNo = width-2;lineNo>1;lineNo-=2){
+    let line = spaceLineGenerator(leftSpaces);
+    line+= generateHollowLine(lineNo,"*"," ","*");
+    emptyLowerPart.push(line);
+    line ="";
     leftSpaces+=1;
   }
-  lowerPart+=spaceLineGenerator((width-1)/2)+"*";
-  return lowerPart;
+  emptyLowerPart.push( lastLine);
+  return emptyLowerPart;
 }
 
 const createAngledUpperPart=function(width){
-  let delimeter="";
-  let upperPart="";
+  let angledUpperPart = [] ;
   let lineWidth=3;
-  upperPart+= generateLine(" ",((width-1)/2))+"*"+"\n";
-  for (lineNo=width-2;lineNo>=3;lineNo-=2){
-    upperPart+=delimeter+ spaceLineGenerator((lineNo-1)/2);
-    upperPart+=generateHollowLine(lineWidth,"/"," ","\\");
-    delimeter="\n";
+  let firstLine = spaceLineGenerator((width-1)/2)+"*";
+  angledUpperPart.push( firstLine);
+  for (lineNo = width-2 ;lineNo >= 3 ;lineNo-= 2){
+    let line = spaceLineGenerator((lineNo-1)/2);
+    line += generateHollowLine(lineWidth,"/"," ","\\");
+    angledUpperPart.push(line);
+    line = "";
     lineWidth+=2;
   }
-  upperPart+=delimeter+generateHollowLine(lineWidth,"*"," ","*");
-  return upperPart;
+  angledUpperPart.push(generateHollowLine(lineWidth,"*"," ","*"));
+  return angledUpperPart;
 }
 
 const createAngledLowerPart=function(width){
-  let lowerPart="";
+  let angledLowerPart = [];
   let lineWidth=width-2;
   let leftSpaces=1;
-  for(let lineNo=width-2;lineNo>1;lineNo-=2,lineWidth-=2){
-    lowerPart+=spaceLineGenerator(leftSpaces)
-    lowerPart+=generateHollowLine(lineWidth,"\\"," ","/")+"\n";
+  for(let lineNo = width-2;lineNo > 1;lineNo-= 2,lineWidth-= 2){
+    let line = spaceLineGenerator(leftSpaces)
+    line += generateHollowLine(lineWidth,"\\"," ","/");
+    angledLowerPart.push(line);
+    line = "";
     leftSpaces+=1;
   }
-  lowerPart+= spaceLineGenerator((width-1)/2)+"*";
-  return lowerPart;
+  angledLowerPart.push(spaceLineGenerator((width-1)/2)+"*");
+  return angledLowerPart;
 }
 
 const createDiamond=function(type,width){
-  let angledDiamond = createAngledUpperPart(width) +"\n"+ createAngledLowerPart(width);
-  let emptyDiamond = createEmptyUpperPart(width) + "\n" + createEmptyLowerPart(width);
-  let filledDiamond = createFilledUpperPart(width)+"\n"+createFilledLowerPart(width);
+  let angledDiamond = createAngledUpperPart(width).concat(createAngledLowerPart(width));
+  let emptyDiamond = createEmptyUpperPart(width).concat(createEmptyLowerPart(width));
+  let filledDiamond = createFilledUpperPart(width).concat(createFilledLowerPart(width));
   if (type=="angled"){
     return angledDiamond;
   }
@@ -103,66 +107,63 @@ const createDiamond=function(type,width){
 }
 
 const createFilledRect=function(breadth,altitude){
-  let rectangle="";
-  let delimeter="";
+  let rectangle = [];
   let line = starLineGenerator(breadth);
   for (let lineNo=0;lineNo<altitude;lineNo++){
-    rectangle+= delimeter+line;
-    delimeter="\n";
+    rectangle.push(line);
   }
   return rectangle;
 }
 
 const alternateRectangle=function(breadth,altitude){
-  let rectangle ="";
+  let rectangle = [] ;
   for (let lineNo=0;lineNo<altitude;lineNo++){
+   let line = starLineGenerator(breadth);
     if (lineNo %2 == 0){
-      rectangle+= generateLine("-",breadth);
-    } else {
-      rectangle+= starLineGenerator(breadth)
+      line = generateLine("-",breadth);
     }
-   rectangle = rectangle + "\n";
+    rectangle.push(line);
   }
   return rectangle;
 }
 
 const emptyRectangle=function(breadth,altitude){
-  let rectangle  = "";
+  let rectangle  = [];
+  let hollowLine = generateHollowLine(breadth,"*"," ","*");
   for (let lineNo=1;lineNo<=altitude;lineNo++){
+    line = hollowLine;
     if (lineNo==1 || lineNo==altitude){
-      rectangle+= starLineGenerator(breadth) + "\n";
-    } else {
-      rectangle+= generateHollowLine (breadth,"*"," ","*")+ "\n";
+      line = starLineGenerator(breadth);
     }
+    rectangle.push(line);
   }
   return rectangle;
 }
 
 const createLeftTriangle=function(altitude){
-  let line = "";
-  let triangle = "";
-  let delimeter = "";
+  let triangle = [];
   for (let lineNo=1;lineNo<=altitude;lineNo++){
-    line+= starLineGenerator(lineNo);
-    triangle+= delimeter+line;
-    line="";
-    delimeter="\n";
+    let line = starLineGenerator(lineNo);
+    triangle.push(line);
   }
   return triangle;
 }
 
+const justifyRight = function(width,symbols){
+  let spacesToAdd = width - symbols.length;
+  return spaceLineGenerator(spacesToAdd) + symbols;
+}
+
 const createRightTriangle=function(altitude){
-  let line="";
-  let noOfSymbols=0;
-  let triangle = "";
-  let delimeter = "";
-  for (let lineNo=altitude;lineNo>0;lineNo--){
-    line+= generateLine(" ",(lineNo-1));
-    noOfSymbols = altitude-(lineNo-1);
-    line+= starLineGenerator(noOfSymbols)
-    triangle+= delimeter+line;
-    line="";
-    delimeter="\n";
+  let triangle = [];
+  let symbols = "";
+  let line = "";
+  for (let lineNo = 1;lineNo <= altitude;lineNo++){
+     symbols = starLineGenerator(lineNo);
+      line = justifyRight(altitude,symbols);
+    triangle.push(line);
+    symbols = "";
+    line = "";
   }
   return triangle;
 }
@@ -172,43 +173,43 @@ const generateRectangle = function (patternSpecification){
   let width = patternSpecification.width;
   let height = patternSpecification.height;
   if(typeOfRectangle == "empty"){
-    return (emptyRectangle(width,height));
+    return emptyRectangle(width,height).join("\n");
   }
 
   if (typeOfRectangle == "filled"){
-    return (createFilledRect(width,height));
+    return createFilledRect(width,height).join("\n");
   }
 
   if(typeOfRectangle == "alternate"){
-    return (alternateRectangle(width,height));
+    return alternateRectangle(width,height).join("\n");
   }
 }
 
 const generateTriangle = function (patternSpecification){
   let typeOfTriangle = patternSpecification.type;
-  let height = patternSpecification.height;
+  let width = patternSpecification.height;
   if(typeOfTriangle == "left"){
-    return (createLeftTriangle(height));
+    return createLeftTriangle(width).join("\n");
   }
   if(typeOfTriangle == "right"){
-    return (createRightTriangle(height));
+    return createRightTriangle(width).join("\n");
   }
 }
 
 const generateDiamond = function (patternSpecification){
   let  typeOfDiamond = patternSpecification.type;
   let  height = patternSpecification.height;
-  if (height%2==0){
+  if (height %2 == 0){
     height = height+1;
   }
   if (typeOfDiamond=="angled"){
-    return (createDiamond("angled",height));
+    return createDiamond("angled",height).join("\n");
   }
   if (typeOfDiamond=="empty"){
-    return (createDiamond("empty",height));
+    return createDiamond("empty",height).join("\n");
   }
   if (typeOfDiamond=="filled"){
-    return (createDiamond("filled",height));
+    return createDiamond("filled",height).join("\n");
   }
 }
 exports.generateDiamond = generateDiamond;

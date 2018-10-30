@@ -94,12 +94,12 @@ expectedOutput_filled_2_2 += "**";
 assert.deepStrictEqual(actualOutput_filled_2_2,expectedOutput_filled_2_2);
 
 //Tests for filled Rectangle  with inputs 2 3 //
-let actualOutput_empty_2_3 = generateRectangle({type : "filled" , width : 2, height : 3});
-let expectedOutput_empty_2_3 = "";
-expectedOutput_empty_2_3 += "**\n"
-expectedOutput_empty_2_3 += "**\n";
-expectedOutput_empty_2_3 += "**";
-assert.deepStrictEqual(actualOutput_empty_2_3,expectedOutput_empty_2_3);
+let actualOutput_filled_2_3 = generateRectangle({type : "filled" , width : 2, height : 3});
+let expectedOutput_filled_2_3 = "";
+expectedOutput_filled_2_3 += "**\n"
+expectedOutput_filled_2_3 += "**\n";
+expectedOutput_filled_2_3 += "**";
+assert.deepStrictEqual(actualOutput_filled_2_3,expectedOutput_filled_2_3);
 
 //Tests for empty Rectangle with inputs 5 5 //
 let actualOutput_empty_5_5 =  generateRectangle({type : "empty", width : 5, height : 5});
@@ -108,7 +108,7 @@ expectedOutput_empty_5_5 += "*****\n";
 expectedOutput_empty_5_5 += "*   *\n"; 
 expectedOutput_empty_5_5 += "*   *\n"; 
 expectedOutput_empty_5_5 += "*   *\n"; 
-expectedOutput_empty_5_5 += "*****\n"; 
+expectedOutput_empty_5_5 += "*****"; 
 assert.deepStrictEqual(actualOutput_empty_5_5,expectedOutput_empty_5_5);
 
 //Tests for empty Rectangle with inputs 20 5 //
@@ -118,21 +118,21 @@ expectedOutput_empty_20_5 += "********************\n";
 expectedOutput_empty_20_5 += "*                  *\n"; 
 expectedOutput_empty_20_5 += "*                  *\n"; 
 expectedOutput_empty_20_5 += "*                  *\n"; 
-expectedOutput_empty_20_5 += "********************\n"; 
+expectedOutput_empty_20_5 += "********************"; 
 assert.deepStrictEqual(actualOutput_empty_20_5,expectedOutput_empty_20_5);
 
 //Tests for empty Rectangle  with inputs 2 2 //
 let actualOutput_empty_2_2 = generateRectangle({type : "empty" ,width : 2, height : 2});
 let expectedOutput_empty_2_2 = "";
 expectedOutput_empty_2_2 += "**\n"
-expectedOutput_empty_2_2 += "**\n";
+expectedOutput_empty_2_2 += "**";
 assert.deepStrictEqual(actualOutput_empty_2_2,expectedOutput_empty_2_2);
 
 //Tests for alternate Rectangle  with inputs 2 2 //
 let actualOutput_alternate_2_2 = generateRectangle({type : "alternate" ,width : 2, height : 2});
 let expectedOutput_alternate_2_2 = "";
 expectedOutput_alternate_2_2 += "--\n"
-expectedOutput_alternate_2_2 += "**\n";
+expectedOutput_alternate_2_2 += "**";
 assert.deepStrictEqual(actualOutput_alternate_2_2,expectedOutput_alternate_2_2);
 
 //Tests for alternate Rectangle with inputs 5 5 //
@@ -142,7 +142,7 @@ expectedOutput_alternate_5_5 += "-----\n";
 expectedOutput_alternate_5_5 += "*****\n"; 
 expectedOutput_alternate_5_5 += "-----\n"; 
 expectedOutput_alternate_5_5 += "*****\n"; 
-expectedOutput_alternate_5_5 += "-----\n"; 
+expectedOutput_alternate_5_5 += "-----"; 
 assert.deepStrictEqual(actualOutput_alternate_5_5,expectedOutput_alternate_5_5);
 
 //Tests for alternate Rectangle with  inputs 3 3 //
@@ -150,7 +150,7 @@ let actualOutput_alternate_3_3 = generateRectangle({type : "alternate" , width :
 let expectedOutput_alternate_3_3 = "";
 expectedOutput_alternate_3_3 += "---\n"; 
 expectedOutput_alternate_3_3 += "***\n"; 
-expectedOutput_alternate_3_3 += "---\n"; 
+expectedOutput_alternate_3_3 += "---"; 
 assert.deepStrictEqual(actualOutput_alternate_3_3,expectedOutput_alternate_3_3)
 
 //Tests for alternate Rectangle with inputs  20 5 //
@@ -160,7 +160,7 @@ expectedOutput_alternate_20_5 += "--------------------\n";
 expectedOutput_alternate_20_5 += "********************\n"; 
 expectedOutput_alternate_20_5 += "--------------------\n"; 
 expectedOutput_alternate_20_5 += "********************\n"; 
-expectedOutput_alternate_20_5 += "--------------------\n"; 
+expectedOutput_alternate_20_5 += "--------------------"; 
 assert.deepStrictEqual(actualOutput_alternate_20_5,expectedOutput_alternate_20_5);
 
 //Tests for filled Diamond with height 5 //

@@ -1,6 +1,5 @@
 const generateLine=function(character,width){
-  let  generatedLine = new Array(width).fill(character).join("");
-  return generatedLine;
+  return new Array(width).fill(character).join("");
 }
 
 const spaceLineGenerator = function(width){
