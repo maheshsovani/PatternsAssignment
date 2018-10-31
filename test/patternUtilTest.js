@@ -1,6 +1,15 @@
 const assert = require("assert");
 const library = require("../src/patternUtil.js");
-const {readUserInput,createDiamondSeries,centreJustifier, generateLine,starLineGenerator,emptyLineGenerator,generateHollowLine,spaceLineGenerator} = library ;
+const {tipGenerator,readUserInput,createDiamondSeries,centreJustifier, generateLine,starLineGenerator,emptyLineGenerator,generateHollowLine,spaceLineGenerator} = library ;
+
+//----------Tets cases for generate line function----------//
+
+assert.deepStrictEqual(tipGenerator(1),"*");
+assert.deepStrictEqual(tipGenerator(2),"*");
+assert.deepStrictEqual(tipGenerator(4)," *");
+assert.deepStrictEqual(tipGenerator(5),"  *");
+assert.deepStrictEqual(tipGenerator(7),"   *");
+
 
 //----------Tets cases for generate line function----------//
 
@@ -51,10 +60,10 @@ assert.deepStrictEqual(centreJustifier(5,"*"),"  *");
 //----------Tets cases for create Diamond series function----------//
 
 assert.deepStrictEqual(createDiamondSeries(0),[]);
-assert.deepStrictEqual(createDiamondSeries(1),[1]);
-assert.deepStrictEqual(createDiamondSeries(2),[1]);
-assert.deepStrictEqual(createDiamondSeries(3),[1,3,1]);
-assert.deepStrictEqual(createDiamondSeries(5),[1,3,5,3,1]);
+assert.deepStrictEqual(createDiamondSeries(1),[]);
+assert.deepStrictEqual(createDiamondSeries(2),[]);
+assert.deepStrictEqual(createDiamondSeries(3),[3]);
+assert.deepStrictEqual(createDiamondSeries(5),[3,5,3]);
 
 
 //----------Tets cases for generate read user input function----------//

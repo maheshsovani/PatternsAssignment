@@ -16,6 +16,11 @@ const generateHollowLine=function(width,startChar,middleChar,endChar){
   return hollowLine;
 }
 
+const tipGenerator = function(width){
+  let spacesToAdd = Math.floor((width-1)/2);
+  return spaceLineGenerator(spacesToAdd)+"*";
+}
+
 const emptyLineGenerator = function(width){
   return generateHollowLine(width,"*"," ","*");
 }
@@ -28,7 +33,7 @@ const centreJustifier = function(width,message){
 
 const createDiamondSeries = function(height){
   let series = [];
-  for (let count = 1 ; count <= height ; count+= 2){
+  for (let count = 3 ; count <= height ; count+= 2){
     series.push(count);
   }
   let duplicateSeries = series.slice(0);
@@ -55,4 +60,4 @@ exports.readUserInput = readUserInput;
 exports.spaceLineGenerator= spaceLineGenerator;
 exports.starLineGenerator= starLineGenerator ;
 exports.generateLine = generateLine;
-
+exports.tipGenerator = tipGenerator;
