@@ -25,6 +25,10 @@ const emptyLineGenerator = function(width){
   return generateHollowLine(width,"*"," ","*");
 }
 
+const angledLineGenerator = function(width){
+ return generateHollowLine(width,"/"," ","\\");
+}
+
 const centreJustifier = function(width,message){
   let spacesToAdd = width-message.length;
   return spaceLineGenerator(Math.floor(spacesToAdd/2))+message;
@@ -61,3 +65,4 @@ exports.spaceLineGenerator= spaceLineGenerator;
 exports.starLineGenerator= starLineGenerator ;
 exports.generateLine = generateLine;
 exports.tipGenerator = tipGenerator;
+exports.angledLineGenerator = angledLineGenerator; 

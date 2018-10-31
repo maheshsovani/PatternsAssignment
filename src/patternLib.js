@@ -1,5 +1,5 @@
 const library = require("./patternUtil.js");
-const {tipGenerator,createDiamondSeries ,centreJustifier,emptyLineGenerator , generateLine,generateHollowLine , starLineGenerator ,spaceLineGenerator} = library;
+const {angledLineGenerator,tipGenerator,createDiamondSeries ,centreJustifier,emptyLineGenerator , generateLine,generateHollowLine , starLineGenerator ,spaceLineGenerator} = library;
 
 const createFilledDiamond = function(width){
   let seriesOfLines = createDiamondSeries(width);
@@ -26,41 +26,27 @@ const createEmptyDiamond = function(width){
   return output;
 }
 
-const createAngledUpperPart=function(width){
-  let angledUpperPart = [] ;
-  let lineWidth=3;
-  let firstLine = spaceLineGenerator(Math.floor((width-1)/2))+"*";
-  angledUpperPart.push( firstLine);
-
-  for (lineNo = width-2 ;lineNo >= 3 ;lineNo-= 2){
-    let line = spaceLineGenerator((lineNo-1)/2);
-    line += generateHollowLine(lineWidth,"/"," ","\\");
-    angledUpperPart.push(line);
-    line = "";
-    lineWidth+=2;
+const createAngledDiamond = function(width){
+  let seriesOfLines = createDiamondSeries(width);
+  let output = [];
+  output.push(tipGenerator(width));
+  let halfWidth = (seriesOfLines.length/2);
+  let upperHalf = seriesOfLines.slice(0,halfWidth);
+  let upperPart = upperHalf.map(angledLineGenerator);
+  let lower = upperPart.slice();
+  let lowerHalf = lower.reverse();
+  let lowerPart = lowerHalf.map(reverseElement);
+  upperPart.push(emptyLineGenerator(width));
+  let diamond = upperPart.concat(lowerPart);
+  for (let index=0;index<diamond.length;index++){
+    output.push(centreJustifier(width,diamond[index]));
   }
-  angledUpperPart.push(generateHollowLine(lineWidth,"*"," ","*"));
-  return angledUpperPart;
-}
-
-const createAngledLowerPart=function(width){
-  let angledLowerPart = [];
-  let lineWidth=width-2;
-  let leftSpaces=1;
-
-  for(let lineNo = width-2;lineNo > 1;lineNo-= 2,lineWidth-= 2){
-    let line = spaceLineGenerator(leftSpaces)
-    line += generateHollowLine(lineWidth,"\\"," ","/");
-    angledLowerPart.push(line);
-    line = "";
-    leftSpaces+=1;
-  }
-  angledLowerPart.push(spaceLineGenerator((width-1)/2)+"*");
-  return angledLowerPart;
+  output.push(tipGenerator(width));
+  return output;
 }
 
 const createDiamond=function(type,width){
-  let angledDiamond = createAngledUpperPart(width).concat(createAngledLowerPart(width));
+  let angledDiamond = createAngledDiamond(width);
   let emptyDiamond = createEmptyDiamond(width);
   let filledDiamond = createFilledDiamond(width);
   if (type=="angled"){

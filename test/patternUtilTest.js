@@ -1,6 +1,6 @@
 const assert = require("assert");
 const library = require("../src/patternUtil.js");
-const {tipGenerator,readUserInput,createDiamondSeries,centreJustifier, generateLine,starLineGenerator,emptyLineGenerator,generateHollowLine,spaceLineGenerator} = library ;
+const {angledLineGenerator,tipGenerator,readUserInput,createDiamondSeries,centreJustifier, generateLine,starLineGenerator,emptyLineGenerator,generateHollowLine,spaceLineGenerator} = library ;
 
 //----------Tets cases for generate line function----------//
 
@@ -10,6 +10,13 @@ assert.deepStrictEqual(tipGenerator(4)," *");
 assert.deepStrictEqual(tipGenerator(5),"  *");
 assert.deepStrictEqual(tipGenerator(7),"   *");
 
+//----------Tets cases for angled line generator function----------//
+
+assert.deepStrictEqual(angledLineGenerator(0),"/\\");
+assert.deepStrictEqual(angledLineGenerator(1),"/\\");
+assert.deepStrictEqual(angledLineGenerator(2),"/\\");
+assert.deepStrictEqual(angledLineGenerator(3),"/ \\");
+assert.deepStrictEqual(angledLineGenerator(5),"/   \\");
 
 //----------Tets cases for generate line function----------//
 
