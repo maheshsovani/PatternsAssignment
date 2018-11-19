@@ -66,7 +66,7 @@ const alternateRectangle=function(width,height){
 
 const emptyRectangle=function(width,height){
   let rectangle  = [];
-  let hollowLine = generateHollowLine(width,"*"," ","*");
+  let hollowLine = generateHollowLine(width,"*","*");
   let starLine = starLineGenerator(width);
   rectangle.push(starLineGenerator(width));
   for (let lineNo=1;lineNo<height-1;lineNo++){

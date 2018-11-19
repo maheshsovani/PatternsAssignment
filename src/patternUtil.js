@@ -10,7 +10,7 @@ const starLineGenerator = function(width){
   return generateLine("*",width);
 }
 
-const generateHollowLine=function(width,startChar,middleChar,endChar){
+const generateHollowLine=function(width,startChar,endChar){
   if(width < 2 ){width = 2}
   let hollowLine = startChar + spaceLineGenerator(width-2)+ endChar;
   return hollowLine;
@@ -22,11 +22,11 @@ const tipGenerator = function(width){
 }
 
 const emptyLineGenerator = function(width){
-  return generateHollowLine(width,"*"," ","*");
+  return generateHollowLine(width,"*","*");
 }
 
 const angledLineGenerator = function(width){
- return generateHollowLine(width,"/"," ","\\");
+ return generateHollowLine(width,"/","\\");
 }
 
 const centreJustifier = function(width,message){
