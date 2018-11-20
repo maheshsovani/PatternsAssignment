@@ -1,14 +1,6 @@
 const assert = require("assert");
 const library = require("../src/patternUtil.js");
-const {angledLineGenerator,tipGenerator,readUserInput,createDiamondSeries,centreJustifier, generateLine,starLineGenerator,emptyLineGenerator,generateHollowLine,spaceLineGenerator} = library ;
-
-//----------Tets cases for generate line function----------//
-
-assert.deepStrictEqual(tipGenerator(1),"*");
-assert.deepStrictEqual(tipGenerator(2),"*");
-assert.deepStrictEqual(tipGenerator(4)," *");
-assert.deepStrictEqual(tipGenerator(5),"  *");
-assert.deepStrictEqual(tipGenerator(7),"   *");
+const {angledLineGenerator,readUserInput,createDiamondSeries,centreJustifier, generateLine,starLineGenerator,emptyLineGenerator,generateHollowLine,spaceLineGenerator} = library ;
 
 //----------Tets cases for angled line generator function----------//
 
@@ -42,11 +34,11 @@ assert.deepStrictEqual(spaceLineGenerator(5),"     ");
 
 //----------Tets cases for generate hollow line function----------//
 
-assert.deepStrictEqual(generateHollowLine(0,"*"," ","*"),"**");
-assert.deepStrictEqual(generateHollowLine(1,"*"," ","*"),"**");
-assert.deepStrictEqual(generateHollowLine(2,"*"," ","*"),"**");
-assert.deepStrictEqual(generateHollowLine(3,"*"," ","*"),"* *");
-assert.deepStrictEqual(generateHollowLine(5,"*"," ","*"),"*   *");
+assert.deepStrictEqual(generateHollowLine(0,"*","*"),"**");
+assert.deepStrictEqual(generateHollowLine(1,"*","*"),"**");
+assert.deepStrictEqual(generateHollowLine(2,"*","*"),"**");
+assert.deepStrictEqual(generateHollowLine(3,"*","*"),"* *");
+assert.deepStrictEqual(generateHollowLine(5,"*","*"),"*   *");
 
 //----------Tets cases for empty line generator function----------//
 
@@ -58,11 +50,21 @@ assert.deepStrictEqual(emptyLineGenerator(5),"*   *");
 
 //----------Tets cases for centre justifier function----------//
 
-assert.deepStrictEqual(centreJustifier(1,"*"),"*");
-assert.deepStrictEqual(centreJustifier(2,"*"),"*");
-assert.deepStrictEqual(centreJustifier(3,"*")," *");
-assert.deepStrictEqual(centreJustifier(5,"*"),"  *");
+let justify = centreJustifier(1);
+let actualOutput = justify("*");
+assert.deepStrictEqual(actualOutput,"*");
 
+justify = centreJustifier(2);
+actualOutput = justify("*");
+assert.deepStrictEqual(actualOutput,"*");
+
+justify = centreJustifier(3);
+actualOutput = justify("*");
+assert.deepStrictEqual(actualOutput," *");
+
+justify = centreJustifier(5);
+actualOutput = justify("*");
+assert.deepStrictEqual(actualOutput,"  *");
 
 //----------Tets cases for create Diamond series function----------//
 
